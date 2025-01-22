@@ -1,0 +1,173 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #DED2BF;
+    color: #241C1A;
+}
+a{
+    text-decoration: none;
+}
+header {
+    background-color: #5D262C;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .logo {
+    font-size: 5px;
+    font-weight: bold;
+    color: #C7BCAC;
+}
+header nav a {
+    color: #C7BCAC;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    font-size: 16px;
+}
+header nav a:hover {
+    text-decoration: underline;
+}
+.hero {
+    background: url('/images/img3.jpg') no-repeat center center/cover;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #DED2BF;
+}
+.hero h1 {
+    font-size: 48px;
+    margin: 0;
+    text-shadow: 2px 2px #5D262C;
+}
+.hero p {
+    font-size: 20px;
+    margin: 20px 0;
+}
+.lead {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    text-shadow: 1px 1px 4px #000;
+}
+.hero .btn {
+    background-color: #5D262C;
+    color: #C7BCAC;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 10px;
+}
+.hero .btn:hover {
+    background-color: #312724;
+}
+.specials {
+    padding: 40px 20px;
+    text-align: center;
+}
+.specials h2, .gallery h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #5D262C;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+.specials .dishes {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.specials .card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.specials .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+.specials .card img {
+    border-bottom: 3px solid #5D262C;
+}
+.specials .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #5D262C;
+    margin-bottom: 10px;
+}
+.specials .card-text {
+    color: #241C1A;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.specials .card .btn {
+    background-color: #5D262C;
+    color: #DED2BF;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.specials .card .btn:hover {
+    background-color: #312724;
+}
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #312724;
+    color: #C7BCAC;
+}
+.footer-content .footer-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+.social-icons {
+    margin-top: 10px;
+}
+.social-icons a {
+    margin: 0 10px;
+    font-size: 20px;
+    color: #C7BCAC;
+    text-decoration: none;
+}
+.social-icons a:hover {
+    color: #DED2BF;
+}
+iframe {
+    border-radius: 5px;
+}
+
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero h1 {
+        font-size: 36px;
+    }
+    .hero p {
+        font-size: 18px;
+    }
+    .specials .dish {
+        width: 100%;
+    }
+}
+.gallery-image {
+    max-height: 400px;
+    object-fit: cover;
+}

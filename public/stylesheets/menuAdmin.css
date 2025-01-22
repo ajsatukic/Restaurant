@@ -1,0 +1,110 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #DED2BF; /* Isto kao landing page */
+    color: #241C1A; /* Isto kao landing page */
+}
+ 
+header {
+    background-color: #5D262C; /* Isto kao landing page */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+ 
+header nav a {
+    color: #C7BCAC; /* Isto kao landing page */
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    font-size: 16px;
+}
+ 
+header nav a:hover {
+    text-decoration: underline;
+}
+ 
+.table-container {
+    padding: 40px 20px;
+}
+ 
+.table-container h1 {
+    font-size: 32px; /* Konzistentno s landing page naslovima */
+    margin-bottom: 20px;
+    text-align: center;
+    color: #5D262C; /* Isto kao landing page */
+}
+ 
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+ 
+.table th,
+.table td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+ 
+.table th {
+    background-color: #5D262C; /* Isto kao landing page */
+    color: #C7BCAC; /* U skladu s bojama */
+}
+ 
+.table td {
+    background-color: #FFF;
+    color: #241C1A; /* Isto kao landing page */
+}
+ 
+.add-button {
+    background-color: #5D262C; /* Isto kao landing page */
+    color: #C7BCAC;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+ 
+.add-button:hover {
+    background-color: #312724; /* Isto kao landing page */
+}
+ 
+.modal-content {
+    border-radius: 10px;
+}
+ 
+.modal-header {
+    background-color: #5D262C; /* Isto kao landing page */
+    color: #C7BCAC; /* Isto kao landing page */
+}
+ 
+.modal-footer .btn {
+    background-color: #5D262C;
+    color: #C7BCAC;
+}
+ 
+.modal-footer .btn:hover {
+    background-color: #312724;
+}
+.add-button {
+    background-color: #5D262C;
+    color: #C7BCAC;
+}
+ 
+.add-button:hover {
+    background-color: #312724;
+}
+ 
+.edit-button {
+    background-color: #DED2BF;
+    color: #5D262C;
+}
+ 
+.edit-button:hover {
+    background-color: #C7BCAC;
+    color: #312724;
+}

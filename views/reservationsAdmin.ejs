@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upravljanje rezervacijama</title>
+    <link rel="icon" href="/images/logo.jpg" type="image/jpeg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/reservationsAdmin.css" rel="stylesheet">
+</head>
+<body>
+    <header class="d-flex justify-content-between align-items-center bg-dark p-3">
+        <div class="logo">
+            <img src="/images/logo.jpg" alt="Restaurant Logo" class="img-fluid" style="max-width: 30px;" />
+        </div>
+        <nav>
+            <a href="/" class="text-light me-3">Početna</a>
+    
+            <% if (user) { %>
+                <% if (user.role === 'admin') { %>
+                    <!-- Opcije za administratora -->
+                    <a href="/admin" class="text-light me-3">Admin Dashboard</a>
+                    <a href="/auth/logout" class="text-light">Odjava</a>
+                <% } else { %>
+                    <!-- Opcije za prijavljenog korisnika -->
+                    <a href="/reservations" class="text-light me-3">Rezervacije</a>
+                    <a href="/auth/logout" class="text-light">Odjava</a>
+                <% } %>
+            <% } else { %>
+                <!-- Opcija za neprijavljene korisnike -->
+                <a href="/auth/login" class="text-light">Prijava</a>
+            <% } %>
+        </nav>
+    </header>
+
+    <section class="reservations-management py-5">
+        <div class="container">
+            <h1 class="text-center mb-4">Upravljanje rezervacijama</h1>
+
+            <!-- Reservations Table -->
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID Rezervacije</th>
+                        <th>Ime korisnika</th>
+                        <th>Broj stola</th>
+                        <th>Datum</th>
+                        <th>Vrijeme</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% reservations.forEach(reservation => { %>
+                        <tr>
+                            <td><%= reservation.id %></td>
+                            <td><%= reservation.user_name %></td>
+                            <td><%= reservation.table_number %></td>
+                            <td><%= reservation.reservation_date %></td>
+                            <td><%= reservation.reservation_time %></td>
+                            <td><%= reservation.status %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

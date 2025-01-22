@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naš Menu</title>
+    <link rel="icon" href="/images/logo.jpg" type="image/jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/landing.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="d-flex justify-content-between align-items-center bg-dark p-3">
+        <div class="logo">
+            <img src="/images/logo.jpg" alt="Restaurant Logo" class="img-fluid" style="max-width: 30px;" />
+        </div>
+        <nav>
+            <a href="/" class="text-light me-3">Početna</a>
+            <a href="/menu" class="text-light me-3">Meni</a>
+    
+            <% if (user) { %>
+                <!-- Prikazuje opcije za prijavljenog korisnika -->
+                <a href="/cart" class="text-light me-3">Vidi Korpu</a>
+                <a href="/reservations" class="text-light me-3">Rezervacije</a>
+                <a href="/auth/logout" class="text-light">Odjava</a>
+            <% } else { %>
+                <!-- Prikazuje prijavu za neprijavljene korisnike -->
+                <a href="/auth/login" class="text-light">Prijava</a>
+            <% } %>
+        </nav>
+    </header>
+    
+ 
+    <!-- Hero Section -->
+    <section class="hero">
+        <div>
+            <h1>Naš Menu</h1>
+            <p class="lead">Istraži našu ukusnu ponudu.</p>
+        </div>
+    </section>
+ 
+    <!-- Menu Section -->
+    <section class="specials">
+        <h2>Naš Menu</h2>
+        <% const categories = {}; menuItems.forEach(item => { %>
+            <% if (!categories[item.category]) { categories[item.category] = []; } %>
+            <% categories[item.category].push(item); %>
+        <% }); %>
+ 
+        <% for (let category in categories) { %>
+            <div class="menu-category">
+                <h3 class="category-title"><%= category %></h3>
+                <div class="dishes">
+                    <% categories[category].forEach(item => { %>
+                        <div class="card">
+                            <img src="<%= item.image_url %>" alt="<%= item.name %>" class="gallery-image">
+                            <div class="card-body">
+                                <h4 class="card-title"><%= item.name %></h4>
+                                <p class="card-text"><%= item.description %></p>
+                                <p class="price"><strong>Cijena:</strong> KM<%= item.price %></p>
+                                <button class="btn add-to-cart" data-id="<%= item.id %>" data-quantity="1">Dodaj u korpu</button>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        <% } %>
+    </section>
+ 
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-md-start text-center">
+                    <div class="footer-text">
+                        <p>&copy; 2025 AM. Sva prava zadržana.</p>
+                        <p>Kontakt: +387 61 123 456 | email@am.ba</p>
+                        <div class="social-icons">
+                            <a href="#" aria-label="Facebook" class="text-light me-3">
+                                <i class="fab fa-facebook fa-lg"></i>
+                            </a>
+                            <a href="#" aria-label="Twitter" class="text-light me-3">
+                                <i class="fab fa-twitter fa-lg"></i>
+                            </a>
+                            <a href="#" aria-label="Instagram" class="text-light">
+                                <i class="fab fa-instagram fa-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                    <p>Adresa: Zmaja od Bosne 33-35, Sarajevo</p>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345093707!2d144.95565161586032!3d-37.81732797975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577bfa1743af7e!2sMelbourne%20Central!5e0!3m2!1sen!2sau!4v1614679867186!5m2!1sen!2sau"
+                            width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </footer>
+ 
+    <style>
+        .menu-category {
+            margin-bottom: 60px;
+        }
+ 
+        .category-title {
+            font-size: 1.8rem;
+            color: #5D262C;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #5D262C;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+ 
+        .gallery-image {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+ 
+        .card {
+            background-color: #DED2BF;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px;
+            width: calc(33.333% - 30px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+ 
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+ 
+        .card-body {
+            padding: 15px;
+            text-align: center;
+        }
+ 
+        .price {
+            font-size: 1.2rem;
+            color: #5D262C;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+ 
+        .dishes {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+ 
+        @media (max-width: 768px) {
+            .card {
+                width: calc(50% - 20px);
+            }
+        }
+ 
+        @media (max-width: 480px) {
+            .card {
+                width: 100%;
+            }
+        }
+    </style>
+
+<script>
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', async () => {
+            const itemId = button.getAttribute('data-id');
+            const quantity = button.getAttribute('data-quantity');
+
+            try {
+                const response = await fetch('/cart/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ itemId, quantity }),
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    alert(result.message);
+                } else if (response.status === 401) {
+                    alert('You need to log in to add items to the cart.');
+                    window.location.href = '/auth/login';
+                } else {
+                    const result = await response.json();
+                    alert(result.error || 'Failed to add item to cart.');
+                }
+            } catch (err) {
+                console.error('Error adding to cart:', err);
+                alert('Something went wrong. Please try again later.');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

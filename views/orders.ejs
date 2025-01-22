@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upravljanje narudžbama</title>
+    <link rel="icon" href="/images/logo.jpg" type="image/jpeg">
+    <link rel="icon" href="/images/logo.jpg" type="image/jpeg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/orders.css" rel="stylesheet">
+</head>
+<body>
+    <header class="d-flex justify-content-between align-items-center bg-dark p-3">
+        <div class="logo">
+            <img src="/images/logo.jpg" alt="Restaurant Logo" class="img-fluid" style="max-width: 30px;" />
+        </div>
+        <nav>
+            <a href="/" class="text-light me-3">Početna</a>
+    
+            <% if (user) { %>
+                <% if (user.role === 'admin') { %>
+                    <!-- Opcije za administratora -->
+                    <a href="/admin" class="text-light me-3">Admin Dashboard</a>
+                    <a href="/auth/logout" class="text-light">Odjava</a>
+                <% } else { %>
+                    <!-- Opcije za prijavljenog korisnika -->
+                    <a href="/reservations" class="text-light me-3">Rezervacije</a>
+                    <a href="/auth/logout" class="text-light">Odjava</a>
+                <% } %>
+            <% } else { %>
+                <!-- Opcija za neprijavljene korisnike -->
+                <a href="/auth/login" class="text-light">Prijava</a>
+            <% } %>
+        </nav>
+    </header>
+ 
+    <section class="orders-management py-5">
+        <div class="container">
+            <h1 class="text-center mb-4">Upravljanje narudžbama</h1>
+ 
+            <!-- Orders Table -->
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID Narudžbe</th>
+                        <th>Ime korisnika</th>
+                        <th>Lista jela</th>
+                        <th>Ukupna cijena</th>
+                        <th>Status</th>
+                        <th>Opcije</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% orders.forEach(order => { %>
+                        <tr>
+                            <td><%= order.id %></td>
+                            <td><%= order.user %></td>
+                            <td><%= order.items %></td>
+                            <td><%= order.total %></td>
+                            <td><%= order.status %></td>
+                            <td>
+                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#updateStatusModal" data-order-id="<%= order.id %>">Ažuriraj status</button>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </section>
+ 
+    <!-- Modal for updating order status -->
+    <div class="modal fade" id="updateStatusModal" tabindex="-1" aria-labelledby="updateStatusModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateStatusModalLabel">Ažuriraj status narudžbe</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateStatusForm">
+                        <input type="hidden" id="orderId" name="orderId">
+                        <div class="mb-3">
+                            <label for="orderStatus" class="form-label">Status</label>
+                            <select class="form-select" id="orderStatus" name="status" required>
+                                <option value="U pripremi">U pripremi</option>
+                                <option value="Isporučeno">Isporučeno</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-danger">Sačuvaj</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Event listener za otvaranje modala i postavljanje ID narudžbe
+document.querySelectorAll('[data-bs-target="#updateStatusModal"]').forEach(button => {
+    button.addEventListener('click', function () {
+        const orderId = this.getAttribute('data-order-id');
+        document.getElementById('orderId').value = orderId;
+    });
+});
+
+// Event listener za slanje forme za ažuriranje statusa
+document.getElementById('updateStatusForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const orderId = document.getElementById('orderId').value;
+    const status = document.getElementById('orderStatus').value;
+
+    try {
+        const response = await fetch('/admin/orders/update-status', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ orderId, status }),
+        });
+
+        if (response.ok) {
+            alert('Status narudžbe uspješno ažuriran!');
+            location.reload(); // Osvježi stranicu
+        } else {
+            const error = await response.json();
+            alert(`Greška: ${error.error}`);
+        }
+    } catch (err) {
+        console.error('Greška prilikom ažuriranja statusa:', err);
+        alert('Došlo je do greške prilikom ažuriranja statusa.');
+    }
+});
+
+</script>
+</body>
+</html>

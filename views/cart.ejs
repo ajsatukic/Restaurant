@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="/stylesheets/landing.css">
+</head>
+<body>
+    <header class="d-flex justify-content-between align-items-center bg-dark p-3">
+        <div class="logo">
+            <img src="/images/logo.jpg" alt="Restaurant Logo" class="img-fluid" style="max-width: 30px;" />
+        </div>
+        <nav>
+            <a href="/" class="text-light me-3">Početna</a>
+            <a href="/menu" class="text-light me-3">Meni</a>
+    
+            <% if (user) { %>
+                <!-- Opcije za prijavljenog korisnika -->
+                <a href="/cart" class="text-light me-3">Vidi Korpu</a>
+                <a href="/reservations" class="text-light me-3">Rezervacije</a>
+                <a href="/auth/logout" class="text-light">Odjava</a>
+            <% } else { %>
+                <!-- Opcija za neprijavljene korisnike -->
+                <a href="/auth/login" class="text-light">Prijava</a>
+            <% } %>
+        </nav>
+    </header>
+    <main>
+        <h1>Your Cart</h1>
+        <% if (items.length > 0) { %>
+            <ul>
+                <% items.forEach(item => { %>
+                  <li>
+                    <img src="<%= item.image_url %>" alt="<%= item.name %>" style="max-width: 100px;">
+                    <h3><%= item.name %></h3>
+                    <p>Quantity: <%= item.quantity %></p>
+                    <p>Price: $<%= item.price %></p>
+                  </li>
+                <% }) %>
+              </ul>              
+            <form action="/orders/checkout" method="POST">
+                <button type="submit" class="btn">Place Order</button>
+            </form>
+        <% } else { %>
+            <p>Your cart is empty!</p>
+        <% } %>
+    </main>
+</body>
+</html>

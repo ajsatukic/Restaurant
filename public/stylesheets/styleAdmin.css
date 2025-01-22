@@ -1,0 +1,170 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif; /* Isti font kao na landing page */
+    font-size: 16px;
+    line-height: 1.6; /* Poboljšava čitljivost */
+    background-color: #DED2BF;
+    color: #241C1A;
+}
+ 
+header {
+    background-color: #5D262C;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+ 
+header nav a {
+    color: #C7BCAC;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    font-size: 16px;
+}
+ 
+header nav a:hover {
+    text-decoration: underline;
+}
+ 
+.admin-dashboard {
+    padding: 40px 20px;
+}
+ 
+.admin-dashboard .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Razmak između redova */
+    gap: 30px; /* Razmak između kartica */
+}
+ 
+.admin-dashboard .col-md-6 {
+    flex: 1 48%; /* Kartice zauzimaju po pola širine */
+    max-width: 100%; /* Osigurava maksimalnu širinu kartica */
+}
+ 
+.admin-dashboard .card {
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 280px; /* Standardna visina za sve kartice */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+ 
+.admin-dashboard .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+ 
+.admin-dashboard .btn {
+    background-color: #5D262C;
+    color: #DED2BF;
+    margin-top: auto;
+    align-self: center;
+}
+ 
+.admin-dashboard .btn:hover {
+    background-color: #312724;
+}
+ 
+.admin-dashboard .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+/* Stilovi za sekciju rezervacija */
+.reservations-container {
+    padding: 40px 20px;
+}
+ 
+.reservations-container h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #5D262C;
+}
+ 
+/* Stilovi za tabelu rezervacija */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+ 
+.table th, .table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+ 
+.table th {
+    background-color: #5D262C;
+    color: #fff;
+    text-transform: uppercase;
+}
+ 
+.table td {
+    background-color: #fff;
+}
+ 
+.table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+ 
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+ 
+.status-confirmed {
+    background-color: #d4edda;
+    color: #155724;
+}
+ 
+.status-cancelled {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+ 
+/* Stil za dugme ažuriranja */
+.update-btn {
+    background-color: #5D262C;
+    color: #DED2BF;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+ 
+.update-btn:hover {
+    background-color: #312724;
+}
+ 
+/* Stil za modal */
+.modal-content {
+    border-radius: 10px;
+}
+ 
+.modal-header {
+    background-color: #5D262C;
+    color: #fff;
+}
+ 
+.modal-footer .btn {
+    background-color: #5D262C;
+    color: #fff;
+}
+ 
+.modal-footer .btn:hover {
+    background-color: #312724;
+}
+ 

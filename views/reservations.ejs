@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rezervacije Stolova</title>
+<link rel="stylesheet" href="/stylesheets/reservations.css">
+</head>
+<body>
+  <header class="d-flex justify-content-between align-items-center bg-dark p-3">
+    <div class="logo">
+        <img src="/images/logo.jpg" alt="Restaurant Logo" class="img-fluid" style="max-width: 30px;" />
+    </div>
+    <nav>
+        <a href="/" class="text-light me-3">Početna</a>
+        <a href="/menu" class="text-light me-3">Meni</a>
+
+        <% if (user) { %>
+            <!-- Opcije za prijavljenog korisnika -->
+            <a href="/cart" class="text-light me-3">Vidi Korpu</a>
+            <a href="/reservations" class="text-light me-3">Rezervacije</a>
+            <a href="/auth/logout" class="text-light">Odjava</a>
+        <% } else { %>
+            <!-- Opcija za neprijavljene korisnike -->
+            <a href="/auth/login" class="text-light">Prijava</a>
+        <% } %>
+    </nav>
+</header>
+<main class="specials">
+<h1>Rezervacije Stolova</h1>
+
+<h2>Dodaj Rezervaciju</h2>
+<form action="/reservations/add" method="POST" class="reservation-form">
+<label for="table_number">Broj Stola:</label>
+<input type="number" id="table_number" name="table_number" required>
+<label for="reservation_date">Datum:</label>
+<input type="date" id="reservation_date" name="reservation_date" required>
+<label for="reservation_time">Vrijeme:</label>
+<input type="time" id="reservation_time" name="reservation_time" required>
+<button type="submit" class="btn">Rezerviši</button>
+</form>
+</section>
+<section>
+<h2>Vaše Rezervacije</h2>
+<% if (reservations.length > 0) { %>
+<table>
+<thead>
+<tr>
+<th>Broj Stola</th>
+<th>Datum</th>
+<th>Vrijeme</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<% reservations.forEach(reservation => { %>
+<tr>
+<td><%= reservation.table_number %></td>
+<td><%= reservation.reservation_date.toISOString().split('T')[0] %></td>
+<td><%= reservation.reservation_time %></td>
+<td><%= reservation.status %></td>
+</tr>
+<% }); %>
+</tbody>
+</table>
+<% } else { %>
+<p>Nemate rezervacija.</p>
+<% } %>
+</section>
+</main>
+<footer class="footer-content">
+<p>&copy; 2025 Restaurant</p>
+</footer>
+ 
+  <!-- Povezivanje JavaScript fajla -->
+<script src="/javascripts/tables.js"></script>
+</body>
+</html>

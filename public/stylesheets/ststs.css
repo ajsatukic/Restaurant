@@ -1,0 +1,51 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #DED2BF;
+    color: #241C1A;
+}
+ 
+header {
+    background-color: #5D262C;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+ 
+header nav a {
+    color: #C7BCAC;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    font-size: 16px;
+}
+ 
+header nav a:hover {
+    text-decoration: underline;
+}
+ 
+.stats-section {
+    padding: 40px 20px;
+}
+ 
+.stats-section h1, .stats-section h3 {
+    color: #5D262C;
+    font-weight: bold;
+}
+ 
+.list-group-item {
+    background-color: #fff;
+    color: #241C1A;
+}
+ 
+.list-group-item .badge {
+    background-color: #5D262C;
+}
+.custom-badge {
+    background-color: #5D262C; /* Ista boja kao dugmad */
+    color: #DED2BF; /* Boja teksta za bolji kontrast */
+    font-weight: bold; /* Podebljan tekst */
+    padding: 10px 15px; /* Veći razmak za vizuelnu ravnotežu */
+    font-size: 14px;
+}

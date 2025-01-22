@@ -1,11 +1,154 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restoran AM</title>
+    <link rel="icon" href="/images/logo.jpg" type="image/jpeg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/landing.css">
+</head>
+<body>
+    <header class="d-flex justify-content-between align-items-center bg-dark p-3">
+        <div class="logo">
+            <img src="/images/logo.jpg" alt="Restaurant Logo" class="img-fluid" style="max-width: 30px;" />
+        </div>
+        <nav>
+            <a href="/" class="text-light me-3">Početna</a>
+            <a href="/menu" class="text-light me-3">Meni</a>
+    
+            <% if (user) { %>
+                <!-- Opcije za prijavljenog korisnika -->
+                <a href="/cart" class="text-light me-3">Vidi Korpu</a>
+                <a href="/reservations" class="text-light me-3">Rezervacije</a>
+                <a href="/auth/logout" class="text-light">Odjava</a>
+            <% } else { %>
+                <!-- Opcija za neprijavljene korisnike -->
+                <a href="/auth/login" class="text-light">Prijava</a>
+            <% } %>
+        </nav>
+    </header>
+    
+    
+ 
+    <div class="hero text-center text-light" style="background-image: url('/images/img3.jpg'); height: 80vh; background-size: cover; background-position: center;">
+        <h1 class="display-4">Dobrodošli u AM!</h1>
+        <p class="lead">Pronađite savršeni obrok i rezervišite svoje mjesto uz samo nekoliko klikova.</p>
+        <div>
+            <button class="btn btn-danger m-2"><a href="/menu" class="text-light me-3">Meni</a></button>
+        </div>
+    </div>
+ 
+    <section class="specials py-5">
+        <div class="container">
+            <h2 class="text-center mb-4 section-title">Naši specijaliteti</h2>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 shadow-sm">
+                        <img src="/images/meni/predjelo5.jpg" class="card-img-top" alt="salata">
+                        <div class="card-body text-center">
+                            <h3 class="card-title">Salata od hobotnice</h3>
+                            <p class="card-text">Nježno kuhani komadi hobotnice s cherry rajčicama, kaparima, maslinama i limunovim preljevom.</p>
+                            <p class="card-text"><strong>Cijena: 20 KM</strong></p>
+                            <button class="btn btn-danger">Dodaj u korpu</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 shadow-sm">
+                        <img src="/images/meni/glavno1.jpg" class="card-img-top" alt="biftek">
+                        <div class="card-body text-center">
+                            <h3 class="card-title"> Biftek s pečenim povrćem</h3>
+                            <p class="card-text">Sočan biftek pečen do savršenstva, posluženo s pečenim povrćem i crvenim vinom.</p>
+                            <p class="card-text"><strong>Cijena: 25 KM</strong></p>
+                            <button class="btn btn-primary">Dodaj u korpu</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 shadow-sm">
+                        <img src="/images/meni/desert4.jpg" class="card-img-top" alt="pannacotta">
+                        <div class="card-body text-center">
+                            <h3 class="card-title">Panna Cotta s jagodama</h3>
+                            <p class="card-text">Talijanski desert s kremastom teksturom, ukrašen umakom od jagoda.</p>
+                            <p class="card-text"><strong>Cijena: 30 KM</strong></p>
+                            <button class="btn btn-primary">Dodaj u korpu</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Gallery Section -->
+    <section class="gallery py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4 section-title">Galerija</h2>
+            <div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="/images/img1.jpg" class="d-block w-100 gallery-image" alt="Slika 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/images/img2.jpg" class="d-block w-100 gallery-image" alt="Slika 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/images/img3.jpg" class="d-block w-100 gallery-image" alt="Slika 3">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/images/img4.jpg" class="d-block w-100 gallery-image" alt="Slika 4">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/images/img5.jpg" class="d-block w-100 gallery-image" alt="Slika 5">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/images/img6.jpg" class="d-block w-100 gallery-image" alt="Slika 6">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+ 
+    <footer class="bg-dark text-light py-4">
+      <div class="container">
+          <div class="row align-items-center">
+              <div class="col-md-6 text-md-start text-center">
+                  <div class="footer-text">
+                      <p>&copy; 2025 AM. Sva prava zadržana.</p>
+                      <p>Kontakt: +387 61 123 456 | email@am.ba</p>
+                      <div class="social-icons">
+                          <a href="#" aria-label="Facebook" class="text-light me-3">
+                              <i class="fab fa-facebook fa-lg"></i>
+                          </a>
+                          <a href="#" aria-label="Twitter" class="text-light me-3">
+                              <i class="fab fa-twitter fa-lg"></i>
+                          </a>
+                          <a href="#" aria-label="Instagram" class="text-light">
+                              <i class="fab fa-instagram fa-lg"></i>
+                          </a>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                  <p>Adresa: Zmaja od Bosne 33-35, Sarajevo</p>
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345093707!2d144.95565161586032!3d-37.81732797975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577bfa1743af7e!2sMelbourne%20Central!5e0!3m2!1sen!2sau!4v1614679867186!5m2!1sen!2sau"
+                          width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+              </div>
+          </div>
+      </div>
+  </footer>
+ 
+ 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
 </html>

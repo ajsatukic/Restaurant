@@ -1,0 +1,238 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #DED2BF;
+    color: #241C1A;
+}
+ 
+header {
+    background-color: #5D262C;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+ 
+header nav a {
+    color: #C7BCAC;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    font-size: 16px;
+}
+ 
+header nav a:hover {
+    text-decoration: underline;
+}
+ 
+.specials {
+    padding: 40px 20px;
+    text-align: center;
+}
+ 
+.specials h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #5D262C;
+    margin-bottom: 30px;
+}
+ 
+.specials h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #5D262C;
+    margin-bottom: 20px;
+}
+ 
+.table-layout {
+    margin-bottom: 40px;
+}
+ 
+.table-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+ 
+.table {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #C7BCAC;
+    border-radius: 10px;
+    background-color: #DED2BF;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+ 
+.table img {
+    width: 50px;
+    height: 50px;
+}
+ 
+.table-number {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #5D262C;
+}
+ 
+.table:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+ 
+.table.reserved {
+    border-color: #5D262C;
+    background-color: #F8D7DA;
+}
+ 
+.table.available {
+    border-color: #C7BCAC;
+    background-color: #D4EDDA;
+}
+ 
+.reservation-form {
+    margin: 0 auto 40px;
+    max-width: 400px;
+    text-align: left;
+}
+ 
+.reservation-form label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #5D262C;
+    margin-bottom: 5px;
+}
+ 
+.reservation-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #C7BCAC;
+    border-radius: 5px;
+}
+ 
+.reservation-form .btn {
+    background-color: #5D262C;
+    color: #DED2BF;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+}
+ 
+.reservation-form .btn:hover {
+    background-color: #312724;
+}
+ 
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+ 
+table th,
+table td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #C7BCAC;
+}
+ 
+table th {
+    background-color: #5D262C;
+    color: #DED2BF;
+    font-weight: bold;
+}
+ 
+table td {
+    background-color: #DED2BF;
+    color: #241C1A;
+}
+ 
+.footer-content {
+    background-color: #5D262C;
+    color: #C7BCAC;
+    text-align: center;
+    padding: 10px;
+}
+.table-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+    justify-content: center;
+    margin: 20px 0;
+  }
+   
+  .table {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+   
+  .table.available {
+    background-color: #28a745; /* Zelena */
+  }
+   
+  .table.reserved {
+    background-color: #dc3545; /* Crvena */
+    pointer-events: none; /* Ne može se kliknuti */
+  }
+   
+  .table:hover {
+    transform: scale(1.1);
+  }
+
+  .table-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+    justify-content: center;
+  }
+   
+  .table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+   
+  .table.reserved {
+    pointer-events: none; /* Nedostupno za klik */
+  }
+   
+  .table img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+  }
+   
+  .table-number {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #5D262C;
+  }
+   
+  .table:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }

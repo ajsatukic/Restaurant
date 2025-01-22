@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upravljanje menijem</title>
+    <link rel="icon" href="/images/logo.jpg" type="image/jpeg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/menuAdmin.css" rel="stylesheet">
+</head>
+<body>
+    <header class="d-flex justify-content-between align-items-center bg-dark p-3">
+        <div class="logo">
+            <img src="/images/logo.jpg" alt="Restaurant Logo" class="img-fluid" style="max-width: 30px;" />
+        </div>
+        <nav>
+            <a href="/" class="text-light me-3">Početna</a>
+    
+            <% if (user) { %>
+                <% if (user.role === 'admin') { %>
+                    <!-- Opcije za administratora -->
+                    <a href="/admin" class="text-light me-3">Admin Dashboard</a>
+                    <a href="/auth/logout" class="text-light">Odjava</a>
+                <% } else { %>
+                    <!-- Opcije za prijavljenog korisnika -->
+                    <a href="/reservations" class="text-light me-3">Rezervacije</a>
+                    <a href="/auth/logout" class="text-light">Odjava</a>
+                <% } %>
+            <% } else { %>
+                <!-- Opcija za neprijavljene korisnike -->
+                <a href="/auth/login" class="text-light">Prijava</a>
+            <% } %>
+        </nav>
+    </header>
+
+    <section class="menu-management py-5">
+        <div class="container">
+            <h1 class="text-center mb-4">Upravljanje menijem</h1>
+
+            <!-- Button to add new item -->
+            <div class="text-end mb-3">
+                <button class="btn add-button" data-bs-toggle="modal" data-bs-target="#addItemModal">Dodaj novo jelo</button>
+            </div>
+
+            <!-- Table for menu items -->
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Naziv</th>
+                        <th>Cijena</th>
+                        <th>Kategorija</th>
+                        <th>Opcije</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% menuItems.forEach(item => { %>
+                      <tr>
+                        <td><%= item.name %></td>
+                        <td><%= item.price %> KM</td>
+                        <td><%= item.category %></td>
+                        <td>
+                          <button class="btn edit-button btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editItemModal" data-id="<%= item.id %>" data-name="<%= item.name %>" data-price="<%= item.price %>" data-category="<%= item.category %>" data-description="<%= item.description %>">
+                            Izmijeni
+                          </button>
+                          <form action="/admin/menu/delete/<%= item.id %>" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-danger btn-sm">Obriši</button>
+                          </form>
+                        </td>
+                      </tr>
+                    <% }); %>
+                  </tbody>
+                  
+            </table>
+        </div>
+    </section>
+
+    <!-- Modal for adding new item -->
+    <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addItemModalLabel">Dodaj novo jelo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/admin/menu/add" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="itemName" class="form-label">Naziv</label>
+                            <input type="text" class="form-control" id="itemName" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="itemPrice" class="form-label">Cijena</label>
+                            <input type="number" class="form-control" id="itemPrice" name="price" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="itemCategory" class="form-label">Kategorija</label>
+                            <select class="form-select" id="itemCategory" name="category" required>
+                                <option value="">Izaberi...</option>
+                                <option value="Predjelo">Predjelo</option>
+                                <option value="Glavno jelo">Glavno jelo</option>
+                                <option value="Desert">Desert</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="itemDescription" class="form-label">Opis</label>
+                            <textarea class="form-control" id="itemDescription" name="description" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn add-button">Dodaj</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for editing item -->
+    <div class="modal fade" id="editItemModal" tabindex="-1" aria-labelledby="editItemModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editItemModalLabel">Izmijeni jelo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/admin/menu/edit" method="POST">
+                        <input type="hidden" id="editItemId" name="id">
+                        <div class="mb-3">
+                            <label for="editItemName" class="form-label">Naziv</label>
+                            <input type="text" class="form-control" id="editItemName" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editItemPrice" class="form-label">Cijena</label>
+                            <input type="number" class="form-control" id="editItemPrice" name="price" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editItemCategory" class="form-label">Kategorija</label>
+                            <select class="form-select" id="editItemCategory" name="category" required>
+                                <option value="">Izaberi...</option>
+                                <option value="Predjelo">Predjelo</option>
+                                <option value="Glavno jelo">Glavno jelo</option>
+                                <option value="Desert">Desert</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editItemDescription" class="form-label">Opis</label>
+                            <textarea class="form-control" id="editItemDescription" name="description" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn edit-button">Sačuvaj</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Populate edit modal with item data
+        document.querySelectorAll('[data-bs-target="#editItemModal"]').forEach(button => {
+            button.addEventListener('click', function () {
+                const itemId = this.getAttribute('data-id');
+                const itemName = this.getAttribute('data-name');
+                const itemPrice = this.getAttribute('data-price');
+                const itemCategory = this.getAttribute('data-category');
+                const itemDescription = this.getAttribute('data-description');
+
+                document.getElementById('editItemId').value = itemId;
+                document.getElementById('editItemName').value = itemName;
+                document.getElementById('editItemPrice').value = itemPrice;
+                document.getElementById('editItemCategory').value = itemCategory;
+                document.getElementById('editItemDescription').value = itemDescription;
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
